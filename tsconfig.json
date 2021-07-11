@@ -9,9 +9,9 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "outDir": "./dist/",
+    "outDir": "app/dist",
     "sourceMap": true    
   },
-  "include": ["./src/**/*", "src/config", "src/config"],
+  "include": ["./app/src/**/*", "src/config", "src/config"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

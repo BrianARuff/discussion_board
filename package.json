@@ -24,8 +24,9 @@
     "@types/pg": "^8.6.1"
   },
   "scripts": {
-    "start": "node dist/main.js",
-    "ts": "tsc --w"
+    "start": "node ./app/dist/main.js",
+    "ts": "tsc --w",
+    "dev": "nodemon ./app/dist/main.js"
   },
   "keywords": [],
   "author": "BrianARuff <brff19@gmail.com>",
