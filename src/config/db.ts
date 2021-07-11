@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { Pool } from 'pg';
 import fs from 'fs';
-import { dirname } from 'path/posix';
 
 const pool = new Pool({
    database: process.env.PROD_DB_NAME,

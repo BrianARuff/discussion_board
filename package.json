@@ -24,7 +24,7 @@
     "@types/pg": "^8.6.1"
   },
   "scripts": {
-    "start": "nodemon dist/main.js",
+    "start": "node dist/main.js",
     "ts": "tsc --w"
   },
   "keywords": [],
