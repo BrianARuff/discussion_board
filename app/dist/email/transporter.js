@@ -6,14 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
-    from: 'briananthonyruff@protonmail.com',
+    from: 'briananthonyruff@gmail.com',
     auth: {
         user: process.env.NM_USER,
         pass: process.env.NM_PASS,
     },
-    port: 1025,
+    service: 'Gmail',
+    port: 465,
     secure: false,
-    host: '127.0.0.1',
+    host: 'smtp.gmail.com',
     debug: false,
     logger: true,
     tls: {
