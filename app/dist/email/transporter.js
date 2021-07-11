@@ -7,16 +7,18 @@ require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
     from: 'briananthonyruff@protonmail.com',
-    service: 'proton',
     auth: {
         user: process.env.NM_USER,
         pass: process.env.NM_PASS,
     },
-    port: 465,
-    secure: true,
-    host: 'smtp.protonmail.com',
+    port: 1025,
+    secure: false,
+    host: '127.0.0.1',
     debug: false,
     logger: true,
+    tls: {
+        rejectUnauthorized: false,
+    },
 });
 exports.default = transporter;
 //# sourceMappingURL=transporter.js.map
