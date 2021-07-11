@@ -16,4 +16,4 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- --------------------------------------------------------
 
-INSERT INTO users (user_name, user_email, user_password) VALUES ('brian', 'brff192@gmail.com', 'NFQW4PxBqFpj94QaNTpV2O1lMaHAdZEVV5PnnA9OhoU');
+INSERT INTO users (user_name, user_email, user_password) VALUES ('brian', 'brff19@gmail.com', 'NFQW4PxBqFpj94QaNTpV2O1lMaHAdZEVV5PnnA9OhoU');

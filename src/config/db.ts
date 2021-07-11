@@ -1,27 +1,20 @@
 import 'dotenv/config';
 import { Pool } from 'pg';
+import fs from 'fs';
+import { dirname } from 'path/posix';
 
-let pool: Pool;
-
-if (process.env.ENV === 'production') {
-   pool = new Pool({
-      user: process.env.PROD_DB_USER,
-      password: process.env.PROD_DB_PASS,
-      host: process.env.PROD_DB_HOST,
-      port: process.env.PROD_DB_PORT,
-      database: process.env.PROD_DB_NAME,
-      max: 25,
-      ssl: true,
-   } as any);
-} else {
-   pool = new Pool({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      port: 5432,
-   });
-}
+const pool = new Pool({
+   database: process.env.PROD_DB_NAME,
+   user: process.env.PROD_DB_USER,
+   password: process.env.PROD_DB_PASS,
+   host: process.env.PROD_DB_HOST,
+   port: process.env.PROD_DB_PORT as any,
+   max: 25,
+   ssl: {
+      rejectUnauthorized: false,
+      ca: fs.readFileSync(__dirname + '/../../ca.pem/'),
+   },
+});
 
 pool.connect();
 
