@@ -37,33 +37,42 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 
       transporter.sendMail(
          {
-            from: 'Brian Anthony Ruff',
+            from: 'briananthonyruff@gmail.com',
             to: user_email,
             subject:
                "Welcome Brian A. Ruff's Email List. Let's chill... I've got cookies!",
             html: `
                 <html>
-                    <h1></h1>welcome to Brian A. Ruff's Email List!</h1>
+                  <head>
+                    <title>Welcome Brian A. Ruff's Email List</title>
+                  </head>
+                  <body>
+                    <h2></h2>Welcome to Brian A. Ruff's Email List!</h2>
                     <h4>Thank you for signing up ${user_name}</h4>
+                    <img src="cid:me" alt="Brian Ruff in his car" width="300" height="300" style="border-radius: 50%; border: 1px solid black;" />
                     <p>Let's hang out sometime and talk about <em>life</em>.</p> 
                     <p>My number is <a href="tel:980-240-6927">980-240-6927</a></p>
-                    <p>
-                        <ol>
-                            <li> My favortie color is <span style="color: #ff0000;">green</span>.<li/>
-                            <li> I like to <a href="https://www.chess.com">Play Chess</a></li>
-                            <li>I like to <a href="https://www.youtube.com">Watch Videos</a></li>
-                            <li>Let <em>me</em> know what you think of my automatic email system after registering an account on my website, please!</li>
-                        </ol>
-                       
-                        .
-                    </p>
+                    <ol>
+                        <li> My favortie color is <span style="color: #00ff00;">green</span>.<li/>
+                        <li> I like to <a href="https://www.chess.com">Play Chess</a></li>
+                        <li>I like to <a href="https://www.youtube.com">Watch/Make Videos on Youtube</a></li>
+                        <li>Let <strong>me</strong> know what you think of my automatic email system after registering an account on my website, please!</li>
+                    </ol>  
                     <p>My email is <a href="mailto:briananthonyruff@gmail.com">brff19@gmail.com</a></p>
                     <p>My LinkedIn is <a href="https://www.linkedin.com/in/brianaruff/">LinkedIn</a></p>
                     <p>My Twitter is <a href="https://twitter.com/brianARuff">@brianARuff</a></p>
                     <p>My Facebook is <a href="https://www.facebook.com/brian.ruff.102">Facebook</a></p>
                     <p>My GitHub is <a href="https://github.com/brianaruff">GitHub</a></p>
                     <p>My Youtube is <a href="https://www.youtube.com/channel/UCxb0mX3Wp6I9YSBngxpSULw">Youtube</a></p> 
+                  </body>
                 </html>`,
+            attachments: [
+               {
+                  cid: 'me',
+                  filename: 'me.jpg',
+                  path: __dirname + '../../images/me.jpg',
+               },
+            ],
          },
          (err: Error | null, info: SMTPTransport.SentMessageInfo) => {
             if (err) {
