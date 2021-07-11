@@ -6,7 +6,7 @@ const app = express();
 middlware(app);
 
 app.listen(process.env.PORT, () => {
-   console.log('server is running on port ' + process.env.PORT || 5000);
+   console.log('server is running on port ' + (process.env.PORT || 5000));
 });
 
 //# sourceMappingURL=main.js.map

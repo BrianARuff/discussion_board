@@ -11,7 +11,6 @@ const pool = new Pool({
    max: 25,
    ssl: {
       rejectUnauthorized: false,
-      ca: fs.readFileSync(__dirname + '/../../ca.pem/'),
    },
 });
 
