@@ -7,7 +7,7 @@ require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
     from: 'briananthonyruff@proton.com',
-    service: 'yahoo',
+    service: 'proton',
     auth: {
         user: process.env.NM_USER,
         pass: process.env.NM_PASS,

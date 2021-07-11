@@ -3,7 +3,7 @@ import nodeMailer, { Transporter } from 'nodemailer';
 
 const transporter: Transporter = nodeMailer.createTransport({
    from: 'briananthonyruff@proton.com',
-   service: 'yahoo',
+   service: 'proton',
    auth: {
       user: process.env.NM_USER,
       pass: process.env.NM_PASS,
