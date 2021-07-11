@@ -6,17 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
-    from: 'briananthonyruff@yahoo.com',
+    from: 'briananthonyruff@protonmail.com',
     service: 'yahoo',
     auth: {
         user: process.env.NM_USER,
         pass: process.env.NM_PASS,
     },
-    port: 465,
-    secure: true,
-    host: 'smtp.mail.yahoo.com',
+    port: 1025,
+    secure: false,
+    host: 'smtp.mail.protonmail.com',
     debug: false,
     logger: true,
+    tls: {
+        rejectUnauthorized: false,
+    },
 });
 exports.default = transporter;
 //# sourceMappingURL=transporter.js.map
