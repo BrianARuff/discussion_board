@@ -14,7 +14,7 @@ var transporter = nodemailer_1.default.createTransport({
     },
     port: 465,
     secure: true,
-    host: 'smtp.mail.protonmail.com',
+    host: 'smtp.mail.proton.com',
     debug: false,
     logger: true,
 });
