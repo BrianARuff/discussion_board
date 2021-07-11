@@ -10,7 +10,7 @@ const transporter: Transporter = nodeMailer.createTransport({
    },
    port: 465,
    secure: true,
-   host: 'smtp.mail.proton.com',
+   host: 'smtp.protonmail.com',
    debug: false,
    logger: true,
 });
