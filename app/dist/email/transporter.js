@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
-    from: 'briananthonyruff@proton.com',
+    from: 'briananthonyruff@protonmail.com',
     service: 'proton',
     auth: {
         user: process.env.NM_USER,

@@ -2,7 +2,7 @@ import 'dotenv/config';
 import nodeMailer, { Transporter } from 'nodemailer';
 
 const transporter: Transporter = nodeMailer.createTransport({
-   from: 'briananthonyruff@proton.com',
+   from: 'briananthonyruff@protonmail.com',
    service: 'proton',
    auth: {
       user: process.env.NM_USER,
