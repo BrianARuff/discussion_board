@@ -2,7 +2,7 @@ import 'dotenv/config';
 import nodeMailer, { Transporter } from 'nodemailer';
 
 const transporter: Transporter = nodeMailer.createTransport({
-   from: 'briananthonyruff@yahoo.com',
+   from: 'briananthonyruff@proton.com',
    service: 'yahoo',
    auth: {
       user: process.env.NM_USER,
@@ -10,7 +10,7 @@ const transporter: Transporter = nodeMailer.createTransport({
    },
    port: 465,
    secure: true,
-   host: 'smtp.mail.yahoo.com',
+   host: 'smtp.mail.protonmail.com',
    debug: false,
    logger: true,
 });
