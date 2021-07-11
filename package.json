@@ -26,7 +26,8 @@
   "scripts": {
     "start": "node ./app/dist/main.js",
     "ts": "tsc --w",
-    "dev": "nodemon ./app/dist/main.js"
+    "dev": "nodemon ./app/dist/main.js",
+    "logs": "heroku logs --tail"
   },
   "keywords": [],
   "author": "BrianARuff <brff19@gmail.com>",

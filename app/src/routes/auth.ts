@@ -49,7 +49,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
                   <body>
                     <h2></h2>Welcome to Brian A. Ruff's Email List!</h2>
                     <h4>Thank you for signing up ${user_name}</h4>
-                    <img src="cid:me" alt="Brian Ruff in his car" width="300" height="300" style="border-radius: 50%; border: 1px solid black;" />
+                    <img src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/155386170_10219591520884254_4960723221713159652_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=auWfmecywbgAX_ad2c0&_nc_ht=scontent-atl3-1.xx&oh=8ca19e14632452a37d5401691d77e064&oe=60F09E89" alt="Brian Ruff in his car" width="300" height="300" style="border-radius: 50%; border: 1px solid black;" />
                     <p>Let's hang out sometime and talk about <em>life</em>.</p> 
                     <p>My number is <a href="tel:980-240-6927">980-240-6927</a></p>
                     <ol>
@@ -66,13 +66,6 @@ authRouter.post('/register', async (req: Request, res: Response) => {
                     <p>My Youtube is <a href="https://www.youtube.com/channel/UCxb0mX3Wp6I9YSBngxpSULw">Youtube</a></p> 
                   </body>
                 </html>`,
-            attachments: [
-               {
-                  cid: 'me',
-                  filename: 'me.jpg',
-                  path: __dirname + '../../images/me.jpg/',
-               },
-            ],
          },
          (err: Error | null, info: SMTPTransport.SentMessageInfo) => {
             if (err) {
