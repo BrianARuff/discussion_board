@@ -6,15 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 var nodemailer_1 = __importDefault(require("nodemailer"));
 var transporter = nodemailer_1.default.createTransport({
-    from: 'briananthonyruff@gmail.com',
-    service: 'Gmail',
+    from: 'briananthonyruff@yahoo.com',
+    service: 'yahoo',
     auth: {
         user: process.env.NM_USER,
         pass: process.env.NM_PASS,
     },
     port: 465,
     secure: true,
-    host: 'smtp.gmail.com',
+    host: 'smtp.mail.yahoo.com',
+    debug: false,
+    logger: true,
 });
 exports.default = transporter;
 //# sourceMappingURL=transporter.js.map
