@@ -8,7 +8,7 @@ var express_1 = __importDefault(require("express"));
 var middlware_1 = __importDefault(require("./middleware/middlware"));
 var app = express_1.default();
 middlware_1.default(app);
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT || 5000, function () {
     console.log('\nserver is running on port ' + (process.env.PORT || 5000));
 });
 //# sourceMappingURL=main.js.map

@@ -44,8 +44,10 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var db_1 = __importDefault(require("../config/db"));
 var transporter_1 = __importDefault(require("../email/transporter"));
 var jwtToken_1 = require("../utils/jwtToken");
+var isValidInfi_1 = __importDefault(require("../utils/isValidInfi"));
+var authorization_1 = __importDefault(require("../utils/authorization"));
 var authRouter = express_1.default.Router();
-authRouter.post('/register', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+authRouter.post('/register', isValidInfi_1.default, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, user_name, user_email, user_password, user, salt, hash, newUser, JWT, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -63,33 +65,73 @@ authRouter.post('/register', function (req, res) { return __awaiter(void 0, void
                 }
                 salt = bcrypt_1.default.genSaltSync(10);
                 hash = bcrypt_1.default.hashSync(user_password, salt);
-                return [4, db_1.default.query("INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3)", [user_name, user_email, hash])];
+                return [4, db_1.default.query("INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *", [user_name, user_email, hash])];
             case 2:
                 newUser = _b.sent();
                 if (newUser.rowCount === 0) {
                     return [2, res.status(500).json('Error creating user')];
                 }
-                transporter_1.default.sendMail({
-                    from: 'briananthonyruff@gmail.com',
-                    to: user_email,
-                    subject: "Welcome Brian A. Ruff's Email List. Let's chill... I've got cookies!",
-                    html: "\n                <html>\n                  <head>\n                    <title>Welcome Brian A. Ruff's Email List</title>\n                  </head>\n                  <body>\n                    <h2></h2>Welcome to Brian A. Ruff's Email List!</h2>\n                    <h4>Thank you for signing up " + user_name + "</h4>\n                    <img src=\"https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/155386170_10219591520884254_4960723221713159652_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=auWfmecywbgAX_ad2c0&_nc_ht=scontent-atl3-1.xx&oh=8ca19e14632452a37d5401691d77e064&oe=60F09E89\" alt=\"Brian Ruff in his car\" width=\"300\" height=\"300\" style=\"border-radius: 50%; border: 1px solid black;\" />\n                    <p>Let's hang out sometime and talk about <em>life</em>.</p> \n                    <p>My number is <a href=\"tel:980-240-6927\">980-240-6927</a></p>\n                    <ol>\n                        <li> My favortie color is <span style=\"color: #00ff00;\">green</span>.<li/>\n                        <li> I like to <a href=\"https://www.chess.com\">Play Chess</a></li>\n                        <li>I like to <a href=\"https://www.youtube.com\">Watch/Make Videos on Youtube</a></li>\n                        <li>Let <strong>me</strong> know what you think of my automatic email system after registering an account on my website, please!</li>\n                    </ol>  \n                    <p>My email is <a href=\"mailto:briananthonyruff@gmail.com\">brff19@gmail.com</a></p>\n                    <p>My LinkedIn is <a href=\"https://www.linkedin.com/in/brianaruff/\">LinkedIn</a></p>\n                    <p>My Twitter is <a href=\"https://twitter.com/brianARuff\">@brianARuff</a></p>\n                    <p>My Facebook is <a href=\"https://www.facebook.com/brian.ruff.102\">Facebook</a></p>\n                    <p>My GitHub is <a href=\"https://github.com/brianaruff\">GitHub</a></p>\n                    <p>My Youtube is <a href=\"https://www.youtube.com/channel/UCxb0mX3Wp6I9YSBngxpSULw\">Youtube</a></p> \n                  </body>\n                </html>",
-                }, function (err, info) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-                        console.log(info);
-                    }
-                });
                 JWT = jwtToken_1.token.generate(newUser.rows[0].user_id);
-                console.log(JWT);
-                return [2, res.status(200).json({ message: 'User created', token: JWT })];
+                res.status(200).json({
+                    message: 'User created',
+                    token: JWT,
+                });
+                return [2, transporter_1.default.sendMail({
+                        from: 'briananthonyruff@gmail.com',
+                        to: user_email,
+                        subject: "Welcome Brian A. Ruff's Email List. Let's chill... I've got cookies!",
+                        html: "\n               <html>\n                 <head>\n                   <title>Welcome Brian A. Ruff's Email List</title>\n                 </head>\n                 <body>\n                   <h2></h2>Welcome to Brian A. Ruff's Email List!</h2>\n                   <h4>Thank you for signing up " + user_name + "</h4>\n                   <img src=\"https://scontent-atl3-1.xx.fbcdn.net/v/t1.6435-9/155386170_10219591520884254_4960723221713159652_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=auWfmecywbgAX_ad2c0&_nc_ht=scontent-atl3-1.xx&oh=8ca19e14632452a37d5401691d77e064&oe=60F09E89\" alt=\"Brian Ruff in his car\" width=\"300\" height=\"300\" style=\"border-radius: 50%; border: 1px solid black;\" />\n                   <p>Let's hang out sometime and talk about <em>life</em>.</p> \n                   <p>My number is <a href=\"tel:980-240-6927\">980-240-6927</a></p>\n                   <ol>\n                       <li> My favortie color is <span style=\"color: #00ff00;\">green</span>.<li/>\n                       <li> I like to <a href=\"https://www.chess.com\">Play Chess</a></li>\n                       <li>I like to <a href=\"https://www.youtube.com\">Watch/Make Videos on Youtube</a></li>\n                       <li>Let <strong>me</strong> know what you think of my automatic email system after registering an account on my website, please!</li>\n                   </ol>  \n                   <p>My email is <a href=\"mailto:briananthonyruff@gmail.com\">brff19@gmail.com</a></p>\n                   <p>My LinkedIn is <a href=\"https://www.linkedin.com/in/brianaruff/\">LinkedIn</a></p>\n                   <p>My Twitter is <a href=\"https://twitter.com/brianARuff\">@brianARuff</a></p>\n                   <p>My Facebook is <a href=\"https://www.facebook.com/brian.ruff.102\">Facebook</a></p>\n                   <p>My GitHub is <a href=\"https://github.com/brianaruff\">GitHub</a></p>\n                   <p>My Youtube is <a href=\"https://www.youtube.com/channel/UCxb0mX3Wp6I9YSBngxpSULw\">Youtube</a></p> \n                 </body>\n               </html>",
+                    }, function (err, info) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            console.log(info);
+                        }
+                    })];
             case 3:
                 error_1 = _b.sent();
                 return [2, res.status(500).json(error_1.message)];
             case 4: return [2];
         }
+    });
+}); });
+authRouter.post('/login', isValidInfi_1.default, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, user_email, user_password, user, isValidPassword, JWT, error_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, user_email = _a.user_email, user_password = _a.user_password;
+                return [4, db_1.default.query("SELECT * FROM users WHERE user_email = $1", [user_email])];
+            case 1:
+                user = _b.sent();
+                if (user.rows.length === 0) {
+                    return [2, res.status(401).json('User not found')];
+                }
+                isValidPassword = bcrypt_1.default.compareSync(user_password, user.rows[0].user_password);
+                if (!isValidPassword) {
+                    return [2, res.status(401).json('Incorrect email or password!')];
+                }
+                JWT = jwtToken_1.token.generate(user.rows[0].user_id);
+                return [2, res.status(200).json({ token: JWT })];
+            case 2:
+                error_2 = _b.sent();
+                console.log(error_2);
+                return [3, 3];
+            case 3: return [2];
+        }
+    });
+}); });
+authRouter.get('/verify', authorization_1.default, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.json(true);
+        }
+        catch (error) {
+            res.json(error.message);
+        }
+        return [2];
     });
 }); });
 exports.default = authRouter;
