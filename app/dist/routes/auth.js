@@ -41,11 +41,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
-var authRouter = express_1.default.Router();
 var db_1 = __importDefault(require("../config/db"));
 var transporter_1 = __importDefault(require("../email/transporter"));
+var jwtToken_1 = require("../utils/jwtToken");
+var authRouter = express_1.default.Router();
 authRouter.post('/register', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, user_name, user_email, user_password, user, salt, hash, newUser, error_1;
+    var _a, user_name, user_email, user_password, user, salt, hash, newUser, JWT, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -81,7 +82,9 @@ authRouter.post('/register', function (req, res) { return __awaiter(void 0, void
                         console.log(info);
                     }
                 });
-                return [2, res.status(200).json({ message: 'User created' })];
+                JWT = jwtToken_1.token.generate(newUser.rows[0].user_id);
+                console.log(JWT);
+                return [2, res.status(200).json({ message: 'User created', token: JWT })];
             case 3:
                 error_1 = _b.sent();
                 return [2, res.status(500).json(error_1.message)];

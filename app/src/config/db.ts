@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { Pool } from 'pg';
-import fs from 'fs';
 
 const pool = new Pool({
    database: process.env.PROD_DB_NAME,
@@ -13,6 +12,14 @@ const pool = new Pool({
       rejectUnauthorized: false,
    },
 });
+
+// const pool = new Pool({
+//    database: process.env.LOCAL_DB_NAME,
+//    user: process.env.LOCAL_DB_USER,
+//    password: process.env.LOCAL_DB_PASSWORD,
+//    host: process.env.LOCAL_DB_HOST,
+//    port: 5432,
+// });
 
 pool.connect();
 

@@ -1,11 +1,12 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-
-const authRouter = express.Router();
 import database from '../config/db';
 import transporter from '../email/transporter';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { token } from '../utils/jwtToken';
+
+const authRouter = express.Router();
 
 authRouter.post('/register', async (req: Request, res: Response) => {
    try {
@@ -75,7 +76,9 @@ authRouter.post('/register', async (req: Request, res: Response) => {
             }
          }
       );
-      return res.status(200).json({ message: 'User created' });
+      const JWT = token.generate(newUser.rows[0].user_id);
+      console.log(JWT);
+      return res.status(200).json({ message: 'User created', token: JWT });
    } catch (error) {
       return res.status(500).json(error.message);
    }
