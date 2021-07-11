@@ -77,7 +77,7 @@ authRouter.post('/register', function (req, res) { return __awaiter(void 0, void
                         {
                             cid: 'me',
                             filename: 'me.jpg',
-                            path: __dirname + '../../images/me.jpg',
+                            path: __dirname + '../../images/me.jpg/',
                         },
                     ],
                 }, function (err, info) {

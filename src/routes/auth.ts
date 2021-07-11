@@ -70,7 +70,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
                {
                   cid: 'me',
                   filename: 'me.jpg',
-                  path: __dirname + '../../images/me.jpg',
+                  path: __dirname + '../../images/me.jpg/',
                },
             ],
          },
